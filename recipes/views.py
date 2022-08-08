@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
+from recipes.models import Recipes
 
 
 def index(request):
-    return render(request, 'index.html')
+    recipes = Recipes.objects.all()
+
+    data = {
+        'recipes' : recipes
+    }
+    return render(request,'index.html', data)
 
 
 def recipes(request):

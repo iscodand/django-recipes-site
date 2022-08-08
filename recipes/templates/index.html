@@ -11,16 +11,20 @@
         <div class="container">
             <div class="row">
                 <!-- Single Best Receipe Area -->
+
+                {% for recipe in recipes %}
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-best-receipe-area mb-30">
                         <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                         <div class="receipe-content">
                             <a href="{% url 'receita' %}">
-                                <h5>Nome da receita</h5>
+                                <h5>{{ recipe.recipe_name }}</h5>
                             </a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
         </div>
     </section>
