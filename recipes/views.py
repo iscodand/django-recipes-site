@@ -6,10 +6,16 @@ def index(request):
     recipes = Recipes.objects.all()
 
     data = {
-        'recipes' : recipes
+        'recipes': recipes
     }
-    return render(request,'index.html', data)
+    return render(request, 'index.html', data)
 
 
 def recipes(request):
-    return render(request, 'receita.html')
+    recipe = get_object_or_404(Recipes)
+
+    recipe_to_show = {
+        'recipes': recipe
+    }
+
+    return render(request, 'receita.html', recipe_to_show)

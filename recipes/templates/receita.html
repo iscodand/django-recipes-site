@@ -44,12 +44,12 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
-                            <span>30 de Fevereiro, 2000</span>
-                            <h2>Nome da receita</h2>
+                            <span>{{ recipes.datetime }}</span>
+                            <h2>{{ recipes.recipe_name }}</h2>
                             <div class="receipe-duration">
-                                <h6>Preparation: 15 minutes</h6>
-                                <h6>Rediment: 2 portions</h6>
-                                <h6>Category: categoria</h6>
+                                <h6>Preparation: {{ recipes.duration }} minutes</h6>
+                                <h6>Rediment: {{ recipes.rendiment }} portions</h6>
+                                <h6>Category: {{ recipes.category }} categoria</h6>
                                 <h6>Per: Pessoa</h6>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                     <div class="col-12 col-lg-8">
                         <!-- Single Preparation Step -->
                         <div class="single-preparation-step d-flex">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                            <p> {{ recipes.description }} </p>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                         <div class="ingredients">
                             <h4>Ingredients</h4>
                             <div class="ingredients">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                                <p>{{ recipes.ingredients }} </p>
                             </p>
                             </div>
                         </div>
