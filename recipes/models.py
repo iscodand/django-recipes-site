@@ -1,6 +1,12 @@
 from django.db import models
-from models import Models
+from datetime import datetime
 
-class Recipes(models.Models):
-    recipe_name = models.CharField(max_length=30)
-    
+
+class Recipes(models.Model):
+    recipe_name = models.CharField(max_length=45)
+    rendiment = models.IntegerField()
+    category = models.CharField(max_length=25)
+    per = models.CharField(default="Person")
+    description = models.TextField(max_length=255)
+    ingredients = models.TextField(max_length=255)
+    datetime = models.DateTimeField(default=datetime.now, blank=False)
