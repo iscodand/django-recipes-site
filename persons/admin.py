@@ -8,4 +8,4 @@ class ListingPersons(admin.ModelAdmin):
     search_fields = ('id', 'person_name',)
 
 
-admin.site.register(Person)
+admin.site.register(Person, ListingPersons)

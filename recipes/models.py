@@ -1,8 +1,10 @@
 from django.db import models
 from datetime import datetime
+from persons.models import Person
 
 
 class Recipes(models.Model):
+    person_name = models.ForeignKey(Person, on_delete=models.CASCADE)
     recipe_name = models.CharField(max_length=45)
     duration = models.IntegerField()
     rendiment = models.IntegerField()
