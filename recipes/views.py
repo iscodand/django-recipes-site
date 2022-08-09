@@ -11,8 +11,8 @@ def index(request):
     return render(request, 'index.html', data)
 
 
-def recipes(request):
-    recipe = get_object_or_404(Recipes)
+def recipes(request, recipes_id):
+    recipe = get_object_or_404(Recipes, pk=recipes_id)
 
     recipe_to_show = {
         'recipes': recipe
