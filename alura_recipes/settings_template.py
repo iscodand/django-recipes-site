@@ -115,6 +115,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'alura_recipes/static')
 ]
+
+# Media files
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
