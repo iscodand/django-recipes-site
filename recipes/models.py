@@ -12,5 +12,5 @@ class Recipes(models.Model):
     description = models.TextField(max_length=255)
     ingredients = models.TextField(max_length=255)
     datetime = models.DateTimeField(default=datetime.now, blank=False)
-    image = models.ImageField(upload_to='images/%d/%m/%Y/', blank=True)
+    image = models.ImageField(upload_to='images/%d/%m/%Y/', blank=False)
     publicated = models.BooleanField(default=False)
