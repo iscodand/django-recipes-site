@@ -19,3 +19,7 @@ def recipes(request, recipes_id):
     }
 
     return render(request, 'receita.html', recipe_to_show)
+
+
+def search(request):
+    return render(request, 'search.html')

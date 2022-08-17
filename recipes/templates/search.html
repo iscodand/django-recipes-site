@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/header.html' %}
+
+    <!-- ##### Best Receipe Area Start ##### -->
+    <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                <!-- Single Best Receipe Area -->
+
+                {% if recipes %}
+                    {% for recipe in recipes %}
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="single-best-receipe-area mb-30">
+                                
+                                {% if recipe.image == '' %}
+                                    <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                                {% else %}
+                                    <img src="{{ recipe.image }}" alt="">
+                                {% endif %}
+
+                                <div class="receipe-content">
+                                    <a href="{% url 'receita' recipe.id %}">
+                                        <h5>{{ recipe.recipe_name }}</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 col-sm-6 col-lg-4">
+                    <p> Recipe not found :( </p>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Best Receipe Area End ##### -->
+
+    {% include 'partials/footer.html' %}
+
+{% endblock %}
