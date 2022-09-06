@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_header.html' %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="" method="">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                            <label for="email"><b>E-mail</b></label>
+                                <input type="text" id="email" class="form-control" name="email" placeholder="Insert your email">
+                            </div>
+                                <div class="col-12 col-lg-12">
+                                <label for="senha"><b>Password</b></label>
+                                <input id="senha" type="password" class="form-control" name="senha" placeholder="Insert your password">
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success" type="submit">Login</button>
+                                <button type="button" class="btn btn-primary" onclick="showCreateAccount()">Don't have account? Create now!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showCreateAccount()
+{
+     location.href = "{% url 'register' %}";
+} 
+</script>
+
+{% include 'partials/_footer.html' %}
+
+{% endblock %}

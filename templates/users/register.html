@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_header.html' %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Create Account :)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="" method="">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <label for="nome_receita"><b>Full name</b></label>
+                                <input type="text" class="form-control" name="nome" placeholder="Ex.:Isco D'And" required>
+                            </div>
+                            <div class="col-12 col-lg-12">
+                                <label for="email"><b>E-mail</b></label>
+                                <input type="email" class="form-control" name="email" placeholder="Ex.: isco@example.com" required>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="password"><b>Password</b></label>
+                                <input type="password" class="form-control" name="password" placeholder="Insert your password" required>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="password2"><b>Confirm your password</b></label>
+                                <input type="password" class="form-control" name="password2" placeholder="Insert your password again" required>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success" type="submit">Create Account</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/_footer.html' %}
+
+{% endblock %}
