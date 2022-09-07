@@ -19,11 +19,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="contact-form-area">
-                    <form action="" method="">
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-12 col-lg-12">
                                 <label for="nome_receita"><b>Full name</b></label>
-                                <input type="text" class="form-control" name="nome" placeholder="Ex.:Isco D'And" required>
+                                <input type="text" class="form-control" name="name" placeholder="Ex.:Isco D'And" required>
                             </div>
                             <div class="col-12 col-lg-12">
                                 <label for="email"><b>E-mail</b></label>
