@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 
 def dashboard(request):
-    return render(request)
+    return render(request, 'users/dashboard.html')
 
 
 def register(request):
@@ -39,8 +40,27 @@ def register(request):
 
 
 def login(request):
-    return render(request, 'users/login.html')
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        if User.objects.filter(email=email).exists():
+            username = User.objects.filter(email=email).values_list('username', flat=True).get()
+            user = auth.authenticate(request, username=username, password=password)
+
+            if user is not None:
+                print('Login realizado com sucesso!')
+                auth.login(request, user)
+                return redirect('dashboard')
+                
+        else:
+            print('Crendeciais incorretas!')
+            return render(request, 'users/login.html')
+
+    else:
+        return render(request, 'users/login.html')
 
 
 def logout(request):
     return render(request)
+    
