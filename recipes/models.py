@@ -12,7 +12,7 @@ class Recipes(models.Model):
     description = models.TextField(max_length=255)
     ingredients = models.TextField(max_length=255)
     datetime = models.DateTimeField(default=datetime.now, blank=False)
-    image = models.ImageField(upload_to='images/%d/%m/%Y/', blank=False)
+    image = models.ImageField(upload_to='images/%d/%m/%Y/', blank=True)
     publicated = models.BooleanField(default=False)
 
     def __str__(self):
