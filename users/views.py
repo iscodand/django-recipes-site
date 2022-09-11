@@ -1,11 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
-
-def dashboard(request):
-    return render(request, 'users/dashboard.html')
-
+from recipes.models import Recipes
 
 def register(request):
     if request.method == 'POST':
@@ -22,13 +20,13 @@ def register(request):
             print('As senhas devem ser iguais!')
             return redirect('register')
 
-        user = User.objects.create_user(
-            username=full_name, email=email, password=password)
-        user.save()
-
         if User.objects.filter(email=email).exists():
             print('Usuário já cadastrado!')
             return redirect('register')
+
+        user = User.objects.create_user(
+            username=full_name, email=email, password=password)
+        user.save()
 
         print(full_name, email, password, password2)
         print('Usuário cadastrado com sucesso!')
@@ -61,6 +59,42 @@ def login(request):
         return render(request, 'users/login.html')
 
 
+@login_required(login_url='/users/login')
+def dashboard(request):
+    user = get_object_or_404(User, pk=request.user.id)
+
+    list_recipes = Recipes.objects.order_by(
+        '-datetime').filter(person_name=user)
+
+    data = {
+        'recipes': list_recipes
+    }
+
+    return render(request, 'users/dashboard.html', data)
+
+
+@login_required(login_url='/users/login')
+def create_recipes(request):
+    if request.method == 'POST':
+        recipe_name = request.POST['recipe_name']
+        ingredients = request.POST['ingredients']
+        preparation_mode = request.POST['preparation_mode']
+        preparation_time = request.POST['preparation_time']
+        rendiment = request.POST['rendiment']
+        category = request.POST['category']
+        recipe_picture = request.FILES['recipe_picture']
+
+        user = get_object_or_404(User, pk=request.user.id)
+        recipe = Recipes.objects.create(person_name=user, recipe_name=recipe_name, duration=preparation_time, rendiment=rendiment, category=category, description=preparation_mode, ingredients=ingredients, image=recipe_picture)
+        recipe.save()
+        
+        return redirect('dashboard')
+
+    else:
+        return render(request, 'users/recipes_form.html')
+
+
 def logout(request):
-    return render(request)
-    
+    auth.logout(request)
+    return redirect('index')
+
