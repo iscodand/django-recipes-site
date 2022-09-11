@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
+from django.contrib import auth, messages
+from .utils import CheckEmptyFields, CheckPassword
 
 from recipes.models import Recipes
 
@@ -12,24 +13,29 @@ def register(request):
         password = request.POST['password']
         password2 = request.POST['password2']
 
-        if not full_name.strip():
-            print('Nome não pode estar em branco!')
+        if CheckEmptyFields.check_empty_field(full_name) or CheckEmptyFields.check_empty_field(email):
+            messages.error(request, 'Fill all fields!')
             return redirect('register')
 
-        if password != password2:
-            print('As senhas devem ser iguais!')
-            return redirect('register')
+        if CheckPassword.check_password_lenght(password):
+            messages.error(request, 'Your password must contain more than 8 digits!')
+            if CheckPassword.check_password_corresponds(password, password2):
+                messages.error(request, "Your passwords don't match!")
+                return redirect('register')
 
         if User.objects.filter(email=email).exists():
-            print('Usuário já cadastrado!')
+            messages.error(request, 'User already registered!')
+            return redirect('register')
+
+        if User.objects.filter(username=full_name).exists():
+            messages.error(request, 'User already registered!')
             return redirect('register')
 
         user = User.objects.create_user(
             username=full_name, email=email, password=password)
         user.save()
 
-        print(full_name, email, password, password2)
-        print('Usuário cadastrado com sucesso!')
+        messages.success(request, 'User registered successfully!')
 
         return redirect('login')
 
