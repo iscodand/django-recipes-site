@@ -1,1 +1,58 @@
-<h1>Dashboard</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_header.html' %}
+
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Hello, {{ user.username }} :)</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+  <!-- ##### Best Receipe Area Start ##### -->
+  <section class="best-receipe-area">
+    <div class="container">
+        <div class="row">
+            <!-- Single Best Receipe Area -->
+
+            {% if recipes %}
+
+                {% for recipe in recipes %}
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-best-receipe-area mb-30">
+                        
+                        {% if recipe.image == '' %}
+                            <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                        {% else %}
+                            <img src="{{ recipe.image }}" alt="">
+                        {% endif %}
+
+                        <div class="receipe-content">
+                            <a href="{% url 'receita' recipe.id %}">
+                                <h5>{{ recipe.recipe_name }}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            {% else %}
+            
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+{% include 'partials/_footer.html' %}
+
+{% endblock %}
