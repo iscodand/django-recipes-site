@@ -23,9 +23,17 @@
                     <form action="{% url 'register' %}" method="post">
                         {% csrf_token %}
                         <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <label for="nome_receita"><b>First name</b></label>
+                                <input type="text" class="form-control" name="first_name" placeholder="Ex.: Isco" required>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="nome_receita"><b>Last name</b></label>
+                                <input type="text" class="form-control" name="last_name" placeholder="Ex.: D'And" required>
+                            </div>
                             <div class="col-12 col-lg-12">
-                                <label for="nome_receita"><b>Full name</b></label>
-                                <input type="text" class="form-control" name="name" placeholder="Ex.:Isco D'And" required>
+                                <label for="nome_receita"><b>Username</b></label>
+                                <input type="text" class="form-control" name="username" placeholder="Ex.: iscodand" require d>
                             </div>
                             <div class="col-12 col-lg-12">
                                 <label for="email"><b>E-mail</b></label>
