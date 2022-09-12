@@ -6,6 +6,7 @@ from .utils import CheckEmptyFields, CheckPassword
 
 from recipes.models import Recipes
 
+
 def register(request):
     if request.method == 'POST':
         full_name = request.POST['name']
@@ -18,7 +19,8 @@ def register(request):
             return redirect('register')
 
         if CheckPassword.check_password_lenght(password):
-            messages.error(request, 'Your password must contain more than 8 digits!')
+            messages.error(
+                request, 'Your password must contain more than 8 digits!')
             if CheckPassword.check_password_corresponds(password, password2):
                 messages.error(request, "Your passwords don't match!")
                 return redirect('register')
@@ -49,16 +51,22 @@ def login(request):
         password = request.POST['password']
 
         if User.objects.filter(email=email).exists():
-            username = User.objects.filter(email=email).values_list('username', flat=True).get()
-            user = auth.authenticate(request, username=username, password=password)
+            username = User.objects.filter(email=email).values_list(
+                'username', flat=True).get()
+            user = auth.authenticate(
+                request, username=username, password=password)
 
             if user is not None:
-                print('Login realizado com sucesso!')
                 auth.login(request, user)
                 return redirect('dashboard')
-                
+            else:
+                messages.error(
+                    request, 'Incorrect e-mail / password! Verify and try again!')
+                return redirect('login')
+
         else:
-            print('Crendeciais incorretas!')
+            messages.error(
+                request, 'Incorrect e-mail / password! Verify and try again!')
             return render(request, 'users/login.html')
 
     else:
@@ -91,9 +99,10 @@ def create_recipes(request):
         recipe_picture = request.FILES['recipe_picture']
 
         user = get_object_or_404(User, pk=request.user.id)
-        recipe = Recipes.objects.create(person_name=user, recipe_name=recipe_name, duration=preparation_time, rendiment=rendiment, category=category, description=preparation_mode, ingredients=ingredients, image=recipe_picture)
+        recipe = Recipes.objects.create(person_name=user, recipe_name=recipe_name, duration=preparation_time, rendiment=rendiment,
+                                        category=category, description=preparation_mode, ingredients=ingredients, image=recipe_picture)
         recipe.save()
-        
+
         return redirect('dashboard')
 
     else:
@@ -103,4 +112,3 @@ def create_recipes(request):
 def logout(request):
     auth.logout(request)
     return redirect('index')
-
