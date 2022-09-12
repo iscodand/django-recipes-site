@@ -1,6 +1,8 @@
 class CheckEmptyFields():
-    def check_empty_field(field: str):
-        return not field.strip()
+    def check_empty_field(*fields: str):
+        for field in fields:
+            return not field.strip()
+
 
 class CheckPassword():
     def check_password_lenght(password: str):

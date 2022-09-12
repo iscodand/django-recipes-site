@@ -9,12 +9,14 @@ from recipes.models import Recipes
 
 def register(request):
     if request.method == 'POST':
-        full_name = request.POST['name']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
 
-        if CheckEmptyFields.check_empty_field(full_name) or CheckEmptyFields.check_empty_field(email):
+        if CheckEmptyFields.check_empty_field(username, email, first_name, last_name):
             messages.error(request, 'Fill all fields!')
             return redirect('register')
 
@@ -26,15 +28,15 @@ def register(request):
                 return redirect('register')
 
         if User.objects.filter(email=email).exists():
-            messages.error(request, 'User already registered!')
+            messages.error(request, 'Email already registered!')
             return redirect('register')
 
-        if User.objects.filter(username=full_name).exists():
-            messages.error(request, 'User already registered!')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already registered!')
             return redirect('register')
 
         user = User.objects.create_user(
-            username=full_name, email=email, password=password)
+            username=username, email=email, password=password, first_name=first_name, last_name=last_name)
         user.save()
 
         messages.success(request, 'User registered successfully!')
