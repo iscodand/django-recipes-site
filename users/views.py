@@ -69,7 +69,7 @@ def login(request):
         else:
             messages.error(
                 request, 'Incorrect e-mail / password! Verify and try again!')
-            return render(request, 'users/login.html')
+            return redirect('login')
 
     else:
         return render(request, 'users/login.html')
