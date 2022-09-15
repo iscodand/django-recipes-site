@@ -39,7 +39,7 @@
                         <div class="receipe-content">
                             <a href="{% url 'receita' recipe.id %}">
                                 <h5>{{ recipe.recipe_name }}</h5>
-                            </a>
+                            <a href="{% url 'delete_recipes' recipe.id %}" class="btn btn-danger"> Delete </a>
                         </div>
                     </div>
                 </div>

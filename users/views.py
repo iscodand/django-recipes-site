@@ -111,6 +111,16 @@ def create_recipes(request):
         return render(request, 'users/recipes_form.html')
 
 
+def delete_recipes(request, recipes_id):
+    if request.method == 'POST':
+        recipe = Recipes.objects.get(pk=recipes_id)
+        recipe.delete()
+        return redirect('dashboard')
+
+    else:
+        return redirect('dashboard')
+
+
 def logout(request):
     auth.logout(request)
     return redirect('index')
