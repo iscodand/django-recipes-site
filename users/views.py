@@ -110,15 +110,11 @@ def create_recipes(request):
     else:
         return render(request, 'users/recipes_form.html')
 
-
+@login_required(login_url='/users/login')
 def delete_recipes(request, recipes_id):
-    if request.method == 'POST':
-        recipe = Recipes.objects.get(pk=recipes_id)
-        recipe.delete()
-        return redirect('dashboard')
-
-    else:
-        return redirect('dashboard')
+    recipe = get_object_or_404(Recipes, pk=recipes_id)
+    recipe.delete()
+    return redirect('dashboard')
 
 
 def logout(request):

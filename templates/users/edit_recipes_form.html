@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_header.html' %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Edit here your recipe, {{ user.first_name }} :)</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+            <p>All fields are required!</p>
+                <div class="contact-form-area">
+                    <form action="{% url 'edit_recipes' recipe.id %}" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <label for="nome_receita"><b>Recipe Title</b></label>
+                                <input type="text" id="recipe_name" class="form-control" name="recipe_name" placeholder="Ex. Potato Steak" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="file"><b>Ingredients</b></label>
+                                <textarea class="form-control" name="ingredients" cols="30" rows="10" placeholder="Ex. 4 Potatoes &#10;500g of the best Steak" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="file"><b>Preparation Mode</b></label>
+                                <textarea class="form-control" name="preparation_mode" cols="30" rows="10" placeholder="Ex. Cut the potatoes in half (carefully)  &#10;cut the steak horizontally, removing the sinews and fat" required></textarea>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="file"><b>Preparation Time (minutes)</b></label>
+                                <input type="number" class="form-control" name="preparation_time" placeholder="Ex. 2" required>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="file"><b>Rendiment</b></label>
+                                <input type="text" class="form-control" name="rendiment" placeholder="Ex. Serv 5 people" required>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="file"><b>Recipe Category</b></label>
+                                <input type="text" class="form-control" name="category" placeholder="Ex. Vegan" required>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Current Picture</b></label>
+                                <img src="{{ recipe.recipe_picture.url }}" alt="">
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="file"><b>The new Picture (the best you had)</b></label>
+                                <input type="file" class="form-control" name="recipe_picture" required>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn delicious-btn mt-30" type="submit">Update your recipe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+  
+ {% include 'partials/_footer.html' %}
+ 
+ {% endblock %}
