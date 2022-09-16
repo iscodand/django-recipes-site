@@ -33,13 +33,14 @@
                         {% if recipe.image == '' %}
                             <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                         {% else %}
-                            <img src="{{ recipe.image }}" alt="">
+                            <img src="{{ recipe.image.url }}" alt="">
                         {% endif %}
 
                         <div class="receipe-content">
                             <a href="{% url 'receita' recipe.id %}">
                                 <h5>{{ recipe.recipe_name }}</h5>
                             <a href="{% url 'delete_recipes' recipe.id %}" class="btn btn-danger"> Delete </a>
+                            <a href="{% url 'edit_recipes' recipe.id %}" class="btn btn-warning"> Edit </a>
                         </div>
                     </div>
                 </div>

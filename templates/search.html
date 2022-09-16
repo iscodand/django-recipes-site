@@ -20,7 +20,7 @@
                                 {% if recipe.image == '' %}
                                     <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                                 {% else %}
-                                    <img src="{{ recipe.image }}" alt="">
+                                    <img src="{{ recipe.image.url }}" alt="">
                                 {% endif %}
 
                                 <div class="receipe-content">

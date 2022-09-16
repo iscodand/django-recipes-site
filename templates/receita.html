@@ -35,7 +35,7 @@
                         {% if recipes.image == '' %}    
                             <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
                         {% else %}
-                            <img src="{{ recipes.image }}">
+                            <img src="{{ recipes.image.url }}">
                         {% endif %}
                     
                     </div>
@@ -56,7 +56,7 @@
                                 <h6>Preparation: {{ recipes.duration }} minutes</h6>
                                 <h6>Rediment: {{ recipes.rendiment }}</h6>
                                 <h6>Category: {{ recipes.category }}</h6>
-                                <h6>By: {{ recipes.person_name }}</h6>
+                                <h6>By: {{ user.first_name }} {{ user.last_name }}</h6>
                             </div>
                         </div>
                     </div>
