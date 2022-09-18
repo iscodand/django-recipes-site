@@ -9,9 +9,7 @@ def search(request):
 
     if 'search' in request.GET:
         recipes_to_search = request.GET['search']
-        if search:
-            list_recipes = list_recipes.filter(
-                recipe_name__icontains=recipes_to_search)
+        list_recipes = list_recipes.filter(recipe_name__icontains=recipes_to_search)
 
     data = {
         'recipes': list_recipes

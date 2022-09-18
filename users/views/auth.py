@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from .utils import CheckEmptyFields, CheckPassword
-from recipes.models import Recipes
 
 
 def register(request):
@@ -72,20 +70,6 @@ def login(request):
 
     else:
         return render(request, 'users/login.html')
-
-
-@login_required(login_url='/users/login')
-def dashboard(request):
-    user = get_object_or_404(User, pk=request.user.id)
-
-    list_recipes = Recipes.objects.order_by(
-        '-datetime').filter(person_name=user)
-
-    data = {
-        'recipes': list_recipes
-    }
-
-    return render(request, 'users/dashboard.html', data)
 
 
 def logout(request):
