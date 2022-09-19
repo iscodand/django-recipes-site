@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 
 
 def index(request):
+    """ View of index page (with paginator) """
     recipes = Recipes.objects.order_by('-datetime').filter(publicated=True)
     paginator = Paginator(recipes, 5)
     page = request.GET.get('page')
@@ -19,6 +20,7 @@ def index(request):
 
 
 def recipes(request, recipes_id):
+    """ View of recipe you choose """
     recipe = get_object_or_404(Recipes, pk=recipes_id)
 
     recipe_to_show = {
@@ -30,6 +32,7 @@ def recipes(request, recipes_id):
 
 @login_required(login_url='/users/login')
 def create_recipes(request):
+    """ View to create recipes """
     if request.method == 'POST':
         recipe_name = request.POST['recipe_name']
         ingredients = request.POST['ingredients']
@@ -52,6 +55,7 @@ def create_recipes(request):
 
 @login_required(login_url='/users/login')
 def delete_recipes(request, recipes_id):
+    """ View to delete recipes """
     recipe = get_object_or_404(Recipes, pk=recipes_id)
     recipe.delete()
     return redirect('dashboard')
@@ -59,6 +63,7 @@ def delete_recipes(request, recipes_id):
 
 @login_required(login_url='/users/login')
 def edit_recipes(request, recipes_id):
+    """ View to edit page """
     recipe = Recipes.objects.get(pk=recipes_id)
     recipe_to_edit = {'recipe' : recipe}
     return render(request, 'recipes/edit_recipes_form.html', recipe_to_edit)
@@ -66,6 +71,7 @@ def edit_recipes(request, recipes_id):
 
 @login_required(login_url='/users/login/')
 def update_recipes(request):
+    """ View to finally update recipes """
     if request.method == 'POST':
         recipe_id = request.POST['recipe_id']
         r = get_object_or_404(Recipes, pk=recipe_id)

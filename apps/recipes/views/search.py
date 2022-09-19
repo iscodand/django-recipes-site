@@ -3,7 +3,7 @@ from ..models import Recipes
 
 
 def search(request):
-
+    """ View to search recipes """
     list_recipes = Recipes.objects.order_by(
         '-datetime').filter(publicated=True)
 
